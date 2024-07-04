@@ -1,0 +1,607 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[LGR,T1]{fontenc}
+\usepackage[utf8]{inputenc} % source file encoding
+\frenchspacing % normal spaces after full stops
+\usepackage[greek,british]{babel} % used languages (last one is default)
+\usepackage{amsmath,amsthm,amssymb} % AMS advanced mathematics (\text), AMS theorems, AMS symbols+fonts (\lesssim)
+%\usepackage{lmodern}
+\usepackage{newtxtext}
+\usepackage[slantedGreek]{newtxmath}
+
+% Mathematics
+\usepackage{isomath} % correct shapes of math symbols according to ISO standards (greek symbols, bold vectors, tensors, etc.)
+\usepackage{siunitx} % SI units, correct typesetting of quantities
+
+\usepackage[a4paper,margin=2.5cm]{geometry} % paper size and margins
+\usepackage{datetime} % to print out time \currenttime
+\usepackage[unicode]{hyperref} % hyperlinks
+\hypersetup{
+pdfauthor={Vít Kučera},
+pdftitle={Typography guidelines for scientists}
+%pdfsubject={},
+%pdfkeywords={}
+}
+
+\usepackage{cprotect} % allows using \verb in macro arguments
+\usepackage{textgreek} % text mode Greek letters, e.g. \textalpha
+\usepackage{doi}
+
+\input{commands.tex}
+
+\author{Vít Kučera (\texttt{vit.kucera@cern.ch})}
+\title{Typography guidelines for scientists}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+Compiled on \today, \currenttime.
+
+Available at \url{https://gitlab.cern.ch/vkucera/typography-guidelines}.
+\end{center}
+
+\abstract{
+This document aims to provide an extensive yet compact overview of formatting conventions which should be respected while writing a~scientific text.
+The guidelines target on publications in the field of high-energy physics written in English and prepared with the typesetting system \LaTeX{}.
+Related comments and suggestions of any kind are very welcome.
+}
+
+\tableofcontents
+
+
+\section{Introduction}
+
+\subsection{What is typography?}
+
+\qm{Typography is the art and technique of arranging type to make written language legible, readable, and appealing when displayed.}~\cite{wiki-typography}
+
+\subsection{Why should you care?}
+
+Following typographical rules and style conventions helps the reader to understand the text without being confused by ambiguities, inconsistencies or distracted by the style.
+
+\subsection{Who is right?}
+
+While many visual aspects of a~document may be subject to personal taste, there are some rules that have been standardised and should be respected regardless of author's preferences.
+
+Standards and recommendations relevant to scientific documents have been published by the following international organisations.
+\begin{itemize}
+\item \href{https://www.bipm.org}{Bureau International des Poids et Mesures (BIPM)}
+
+BIPM defines the The International System of Units (SI) and the rules for using them correctly~\cite{bipm-si-brochure}.
+
+\item \href{https://www.iso.org}{International Organization for Standardization (ISO)}
+
+The standard ISO 80000 introduces the International System of Quantities (ISQ) which defines quantities used in scientific disciplines~\cite{iso-80000-1}.
+
+\item \href{http://iupap.org}{International Union of Pure and Applied Physics (IUPAP)}
+
+The \qm{Red Book} by IUPAP provides authoritative guidance on the use of symbols, units and nomenclature in physics~\cite{iupap-red-book}.
+
+\item \href{https://iupac.org}{International Union of Pure and Applied Chemistry (IUPAC)}
+
+The \qm{Green Book} by IUPAC provides a~compilation of widely used terms and symbols in physical chemistry~\cite{iupac-green-book}.
+\end{itemize}
+Comprehensive guidelines on usage of SI units and style conventions are also provided by the \href{https://www.nist.gov}{National Institute of Standards and Technology (NIST)} in special publications~\cite{nist-si,nist-si-guide} and on their websites~\cite{nist-units}.
+
+
+\section{General}
+
+consistency: one name for one quantity, British vs US spelling, position and order of descriptive indeces
+
+Consistency is crucial.
+Make sure to use only one expression for a specific entity.
+If you use a symbol to refer to an entity, make sure it looks the same everywhere.
+
+\section{Mathematics}
+
+\begin{enumerate}
+\item Do not use \verb_$$ $$_ for unnumbered equations.
+Use \verb_\[ \]_ instead.
+You will avoid vertical-spacing problems.
+See \href{https://texfaq.org/FAQ-dolldoll.html}{\TeX{} FAQ} for more details.
+
+\item Do not use \verb_$_ in definitions of new commands, especially if they are supposed to be used in math mode only.
+If the new command is supposed to be used in text mode but requires features of the math mode (typically sub-/superscripts), use \verb_\ensuremath{ }_.
+You will avoid unwanted escaping from math mode.
+
+\item Consider using \verb_\( \)_ for inline math expressions instead of \verb_$ $_.
+It will make debugging easier as you will avoid typing one \verb!$! more or less.
+\end{enumerate}
+
+Recommendations by ISO 80000~\cite{iso-80000-2}
+
+total vs partial derivative
+
+\section{Quantities and units}
+
+The SI units are defined by the International System of Units (SI)~\cite{bipm-si-brochure}.
+Using the SI implies also following the related mandatory rules~\cite[Sec.~5.4.1]{bipm-si-brochure}.
+Some important extracts are quoted below.
+\begin{enumerate}
+\item \qm{Unit symbols are printed in upright type regardless of the type used in the surrounding text. They are printed in lower-case letters unless they are derived from a proper name, in which case the first letter is a capital letter.}~\cite[Sec.~5.2]{bipm-si-brochure}
+(Exception: L and~l are both allowed for the litre.)
+
+\item \qm{Unit symbols are mathematical entities and not abbreviations. Therefore, they are not followed by a period except at the end of a sentence, and one must neither use the plural nor mix unit symbols and unit names within one expression, since names are not mathematical entities.}~\cite[Sec.~5.2]{bipm-si-brochure}
+
+\item \qm{In forming products and quotients of unit symbols the normal rules of algebraic
+multiplication or division apply. Multiplication must be indicated by a space or a half-high
+(centred) dot (\ml{\cdot}), since otherwise some prefixes could be misinterpreted as a unit symbol.
+Division is indicated by a horizontal line, by a solidus (oblique stroke, \ml{/}) or by negative
+exponents. When several unit symbols are combined, care should be taken to avoid
+ambiguities, for example by using brackets or negative exponents. A solidus must not be
+used more than once in a given expression without brackets to remove ambiguities.}~\cite[Sec.~5.2]{bipm-si-brochure}
+
+\item \qm{The use of the correct symbols for SI units, and for units in general, as listed in earlier chapters of this brochure, is mandatory.}~\cite[Sec.~5.2]{bipm-si-brochure}
+
+\item \qm{Symbols for quantities are generally single letters set in an italic font, although they may be qualified by further information in subscripts or superscripts or in brackets.}~\cite[Sec.~5.4.1]{bipm-si-brochure}
+
+\item \qm{\ldots symbols for quantities are recommendations (in contrast to symbols for units, for which the use of the correct form is mandatory).}~\cite[Sec.~5.4.1]{bipm-si-brochure}
+
+\item \qm{Symbols for units are treated as mathematical entities. In expressing the value of a quantity as the product of a numerical value and a unit, both the numerical value and the unit may be treated by the ordinary rules of algebra.}~\cite[Sec.~5.4.1]{bipm-si-brochure}
+
+\item \qm{The numerical value always precedes the unit and a space is always used to separate the unit from the number. Thus the value of the quantity is the product of the number and the
+unit. The space between the number and the unit is regarded as a multiplication sign (just as
+a space between units implies multiplication). The only exceptions to this rule are for the unit symbols for degree, minute and second for plane angle, \si{\degree}, \si{\arcminute} and \si{\arcsecond}, respectively, for which no space is left between the numerical value and the unit symbol.}~\cite[Sec.~5.4.3]{bipm-si-brochure}
+
+\item \qm{Even when the value of a quantity is used as an adjective, a space is left between the
+numerical value and the unit symbol.}~\cite[Sec.~5.4.3]{bipm-si-brochure}
+\end{enumerate}
+
+Unbreakable space between number and unit.
+
+\subsection{Note on the \si{\percent} symbol}
+
+Despite the common practice in ordinary English text, the correct way to use the \si{\percent} symbol within the SI is to separate it by a~space from the number.
+Although it follows already from the general rules quoted above, the SI brochure mentions this case explicitly.
+\qm{The internationally recognized symbol \si{\percent} (percent) may be used with the SI. When it is used, a space separates the number and the symbol \si{\percent}.}~\cite[Sec.~5.4.7]{bipm-si-brochure}
+
+\subsection{Meaningless expressions}
+
+Avoid using quantities in arguments of functions which do not operate on their units.
+For example, expression \ml{m^{2}}, where \ml{m} is mass, is meaningful because the expression \si{\kg\squared} is defined.
+On the other hand, expressions like \ml{m+m^{2}}, \ml{\sin{m}}, \ml{\euler^{m}}, \ml{\ln{m}} are not meaningful because the corresponding expressions for \si{\kg} (\ml{\si{\kg}+\si{\kg\squared}}, \ml{\sin{\si{\kg}}},\ldots) are not defined.
+To use the numerical value of a~quantity in such a~function, divide the quantity by its unit and mention the unit explicitly as the numerical value depends on the choice of the unit: \ml{\ln{(m/\si{\kg})}}.
+
+This also applies to relations (\ml{=}, \ml{<}, \ml{>},\ldots), so for example expression \ml{E>2}, where \ml{E} is energy, is also meaningless as \ml{\si{\joule} > 2} is not defined.
+Strictly speaking, same could be said about the expression \ml{1 < E < \SI{3}{\mev}} but since the used unit is mentioned explicitly, the intended meaning is clear.
+
+\subsubsection{Wrong units}
+
+Avoid using wrong units, e.g.:
+\begin{enumerate}
+    \item Unit of momentum is \si{\gevc}, not \si{\gev}.
+    \item Unit of mass is \si{\gevcc}, not \si{\gev}.
+\end{enumerate}
+
+Dimensionless quantities.
+
+\ml{\phi = \SI{1}{\radian}}, \ml{\eta = 0.1}
+
+\section{Figures}
+
+Caption under figure.
+
+
+\section{Tables}
+
+Caption above table.
+
+
+\section{Fonts}
+
+Symbols of mathematical entities should be printed using the math mode.
+Text mode should be used for everything else.
+
+Mathematical entities include: numbers, units, quantities, variables, constants, functions, operators, relations, running indices,\ldots
+
+Text entities include: words, abbreviations, descriptive labels, particle names,\ldots
+
+Numbers can be used in both modes but the font choice should always match the one of the expression the number appears in.
+
+font selection in \LaTeX{}
+
+The \LaTeX{} Font Catalogue~\cite{latex-fonts}
+
+In the New Font Selection Scheme (NFSS), the appearance of text is defined by the choice of
+\begin{itemize}
+\item encoding
+\item family (e.g. serif, sans serif, monospaced)
+\item series (weight and width), (e.g. medium, bold, light, condensed, expanded)
+\item shape (e.g. upright, italic, slanted, small capitals)
+\item size (e.g. 10 pt, 12 pt)
+\end{itemize}
+
+\url{https://en.wikibooks.org/wiki/LaTeX/Fonts}
+
+Font (super) family can be chosen by loading the respective package (e.g. \verb_\usepackage{lmodern}_ for the Latin Modern superfamily).
+
+\subsection{Deprecated \LaTeX{} commands}
+
+Do not use commands \verb_\rm_, \verb_\sf_, \verb_\tt_, \verb_\it_, \verb_\sl_, \verb_\em_ and \verb_\bf_.
+They have been deprecated since the release of \LaTeXe{} and the introduction of the New Font Selection Scheme (NFSS).
+
+See \href{https://texfaq.org/FAQ-2letterfontcmd}{\TeX{} FAQ} for more details.
+
+\subsection{Obsolete \LaTeX{} fonts}
+
+\texttt{times}, \texttt{math­ptm}, \texttt{mathptmx} $\to$ \texttt{newtx}
+
+\subsection{Roman vs upright}
+
+In professional typography, ``roman'' means upright medium-weight font.
+Contrary to this common terminology, ``roman'' means serif family in \LaTeX{}.
+
+\url{https://tex.stackexchange.com/questions/191452/shouldnt-beamer-redefine-mathrm}
+``Roman family, in latex this means glyphs with serifs.''
+
+If the main text font or math font of the document are sans-serif fonts (typically in beamer or in some journals), one should avoid using \verb_\textrm_ and \verb_\mathrm_ commands, respectively, because they activate usage of a~serif font.
+
+It is useful to define the \verb_\mathup_ command to print upright symbols in math mode without changing the math font family (see Sec.~\ref{sec:mathup}).
+This can be used typically for printing units, the differential \ml{\mathup{d}} in total derivatives and integrals and symbols of mathematical constants that use Latin alphabet letters, e.g. imaginary unit \ml{\mathup{i}}, base of natural logarithm \ml{\mathup{e}}.
+See Sec.~\ref{sec:greek} for suggestions on printing the constant \ml{\pic}.
+
+
+To define a~new named operator or function, use \verb_\DeclareMathOperator_ (or \verb_\operatorname_ for one-time usage).
+Note that these commands use special spacing rules so they are not interchangeable with \verb_\mathrm_ (or \verb_\mathup_).
+See \url{https://tex.stackexchange.com/questions/48459/whats-the-difference-between-mathrm-and-operatorname/48463}
+
+\subsection{Italics and boldface}
+
+Recommendations given by BIPM~\cite{bipm-si-brochure}, ISO~\cite{iso-80000-1,iso-80000-2}, IUPAP~\cite{iupap-red-book} and IUPAC~\cite{iupac-green-book} all agree on a~list of general rules which can be summarised as follows:
+
+\begin{itemize}
+\item \textit{Italic} font should be used for symbols representing quantities or variables, upright font should be used for all other symbols.
+\item \textbf{\textit{Boldface}} font should be used for vectors and matrices.
+\item \textsf{\textbf{\textit{Sans-serif boldface}}} font should be used for tensors.
+\end{itemize}
+
+The last rule implies that using a~sans-serif font as the default math font (like in beamer) is not a~good idea for documents using linear algebra objects.
+
+Since family, shape and weight of the font used for a~given mathematical symbol precise the meaning of the entity represented by that symbol, they should stay the same throughout the document so that the appearance of the symbol does not depend on the attributes of the surrounding text (e.g. bold titles, italic theorems).
+
+What is a variable?
+
+What is not a variable?
+
+Exceptions: chemical formulas
+
+
+particle symbols
+IUPAC~\cite[Secs. 1.6, 2.10.1 (ii)]{iupac-green-book}
+
+\subsubsection{Note on PDG}
+
+Contrary to international standardised conventions, the Particle Data Group (PDG) uses their own convention: \qm{We give here our conventions on type-setting style. Particle symbols are italic (or slanted) characters}~\cite[p. 15]{pdg-2018}.
+This is obviously a~very unfortunate decision as it makes some particle symbols look the same as symbols of some frequently used quantities (e.g. \ml{u}, \ml{p}, \ml{s}, \ml{e}, \ml{t}).
+A~closer look at the \qm{Review of Particle Physics} suggests that such a~choice was most likely made due to authors' ignorance on the font selection in \LaTeX{} or simply due to laziness.
+
+\subsubsection{Math italics vs. text italics}
+
+A~sequence of letters in math mode is interpreted by \LaTeX{} as a~product of single-letter variables and corresponding spacing rules are applied accordingly.
+This is one of the reasons why math mode is used for mathematics and text mode for text.
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\LaTeX{} input & output \\
+\hline
+\verb_$default, efficiency, VARIATION.$_ & $default, efficiency, VARIATION.$ \\
+\verb_\textit{default, efficiency, VARIATION.}_ & \textit{default, efficiency, VARIATION.} \\
+\hline
+\end{tabular}
+\end{center}
+
+mathrm
+
+\subsection{Greek letters}
+\label{sec:greek}
+
+Enable support for Greek text.
+
+\verb!\usepackage[greek,british]{babel}!
+
+\verb!\newcommand{\gr}[1]{{\foreignlanguage{greek}{#1}}}!
+
+\gr{a} (\verb!\gr{a}!), \gr{p} (\verb!\gr{p}!), \gr{y} (\verb!\gr{y}!)
+
+alphabet equivalents in babel
+
+options suggested in the \texttt{isomath} package manual
+
+\texttt{textgreek} package for Greek letters in text mode.
+
+\textbf{\textalpha, \textpi, \textphi}
+
+\section{Spacing}
+\label{sec:spacing}
+
+\qm{There shall be spaces on both sides of most signs for dyadic operators such as $+$, $-$, $\pm$, $\times$ and $\cdot$ (but not for the solidus), and relations, such as $=$, $<$, $\le$, but not after monadic operators $+$ and $-$.}~\cite{iso-80000-1}\\
+Example: $1-3=-2$.
+
+unbreakable spaces, \verb_\mbox_
+
+Use \verb_{}_ after user-defined text or symbol commands.
+
+Space after period.
+\verb_\frenchspacing_
+
+\section{Punctuation}
+
+\subsection{Hyphen, en dash, minus}
+
+They have different meaning and therefore look different (see Tab.~\ref{tab:dash}).
+
+\begin{description}
+\item [hyphen] typical usage: compound adjectives, hyphenation\\
+examples: heavy-ion collision, strange-particle production, invariant-mass distribution, centre-of-mass energy
+\item [en dash] typical usage: pairs, ranges\\
+examples: nucleus--nucleus collision, quark--gluon plasma, Bose--Einstein distribution, jet--hadron correlations, \SIrange{2}{3}{\metre}, \SIrange{0}{10}{\percent}, 3--4 June
+\item [minus] typical usage: subtraction, negative sign\\
+examples: \ml{1-3=-2}, \ml{\euler^{\im\pic} = -1}
+\end{description}
+
+\begin{table}[htbp]
+\centering
+\caption{Visual differences between hyphen, en dash and minus.}
+\begin{tabular}{|l|l|l|}
+\hline
+symbol & input & output \\
+\hline
+hyphen & \verb!a-b! & a-b \\
+en dash & \verb!a--b! & a--b \\
+minus & \verb!\(a-b\)! & \ml{a-b}  \\
+\hline
+\end{tabular}
+\label{tab:dash}
+\end{table}
+
+\subsection{Quotation marks}
+
+\begin{itemize}
+\item \verb_``correct''_ $\to$ ``correct''
+\item \verb_"incorrect"_ $\to$ "incorrect"
+\end{itemize}
+
+localisation?
+
+\section{Bibliography issues}
+
+It is often very convenient to copy reference entries from \href{https://inspirehep.net/}{INSPIRE} in the \textsc{Bib}\TeX{} format and paste them in a \texttt{bib} database.
+However one should refrain from copy-pasting the entries blindly.
+
+\subsection{Publication titles}
+
+Titles of publications are sometimes stored incorrectly by INSPIRE.
+Usual discrepancies concern hyphens vs. dashes, lower vs. upper case and mathematical expressions.
+If you want to make sure that titles of references appear correctly in your document, adjust your \textsc{Bib}\TeX{} entry according to the original title as it appears in the actual published \texttt{pdf} file.
+Correct potential typography errors in the original title.
+
+Some bibliography styles modify titles by changing the case of letters (e.g. first letters of words in upper case, others in lower case).
+In order to avoid this behaviour enclose the title in additional braces: \verb_title = {{Title of cited paper}}_
+
+Examples of publications with badly formatted titles on INSPIRE:
+
+\doi{10.1103/PhysRevC.74.034903},
+
+\doi{10.1103/PhysRevC.48.2462},
+
+\doi{10.1103/PhysRevC.79.034909},
+
+\doi{10.1140/epjc/s10052-009-1227-4},
+
+\doi{10.1103/PhysRevC.69.034909},
+
+\doi{10.1103/PhysRevC.72.014908},
+
+\doi{10.1007/JHEP06(2016)050},
+
+\doi{10.1016/j.physletb.2016.07.050},
+
+\doi{10.1016/j.physletb.2016.05.027},
+
+\doi{10.1016/j.physletb.2015.12.030},
+
+\doi{10.1103/PhysRevC.93.024905},
+
+\doi{10.1103/PhysRevLett.111.162301},
+
+\doi{10.1140/epjc/s10052-011-1594-5},
+
+\doi{10.1140/epjc/s10052-014-3231-6},
+
+\doi{10.1016/0370-2693(89)90675-8},
+
+\doi{10.1103/PhysRevLett.87.212502},
+
+\doi{10.1007/BF01279121}.
+
+\subsection{Journal names and volume numbers}
+
+For journals having a~single letter at the end of their names (e.g. Physics Letters~B, Physical Review~A) INSPIRE strips this letter away and puts it in the \verb_volume_ field together with the volume number.\\
+\verb_journal = {Phys. Lett.},_ \\
+\verb_volume = {B728},_\\
+This results in incorrect format of the bibliography entry which is especially noticeable when each entry is typeset using a~different font:\\
+\textit{Phys. Lett.} \textbf{B728} instead of the correct \textit{Phys. Lett. B} \textbf{728}.
+
+Abbreviations of journal names follow the rules prescribed by the ISO~4 standard~\cite{iso-4}.
+
+
+\section{Other style remarks}
+
+orphans, widows
+
+It is a~good practice to prevent single-letter words (typically \qm{a} and \qm{I} in English) from hanging at the end of a~line by putting a~non-breaking space \verb!~! between them and the next word in the sentence.
+
+customised hyphenation
+
+\section{Tips}
+
+\cite{vieth-experience}
+\cite{latex-short,latex-tabu,latex-tips,latex-dos-donts,latex-wikibook}
+
+\subsection{Useful \LaTeX{} packages}
+
+\subsubsection{\texttt{siunitx}}
+
+\href{https://ctan.org/pkg/siunitx}{\texttt{siunitx}}
+
+\SI{1}{\micro\ohm}
+
+useful also for number formatting \num{1.3e6}, \num{1234}, \num{12345}, \num{1,5}
+
+\subsubsection{\texttt{isomath}}
+
+\href{https://ctan.org/pkg/isomath}{\texttt{isomath}}
+
+\subsection{Obsolete \LaTeX{} packages}
+
+There is a~list of obsolete packages and their replacements on the \href{https://latex.org/forum/viewtopic.php?t=6637}{\LaTeX{} Community} webpage.
+
+\subsection{Useful \LaTeX{} commands}
+
+\cprotect\subsubsection{\verb_\mathup_}
+\label{sec:mathup}
+
+To print mathematical symbols using upright medium-weight font without changing the font family, one can define
+
+\verb_\DeclareMathAlphabet{\mathup}{OT1}{\familydefault}{m}{n}_
+
+Typical usage:
+\begin{itemize}
+\item differential \ml{\mathup{d}} (\verb_\mathup{d}_),
+\item mathematical constants (\ml{\mathup{e}}, \ml{\mathup{i}}) (\verb_\mathup{e}_, \verb_\mathup{i}_).
+\end{itemize}
+
+\url{https://tex.stackexchange.com/questions/98008/is-mathrm-really-preferable-to-text}
+
+\cprotect\subsubsection{\verb_\tn_}
+
+To print text using upright medium-weight font without changing the font family, one can define a shortcut for \verb_\textnormal_
+
+\verb_\newcommand{\tn}[1]{\textnormal{#1}}_
+
+Typical usage: text entities in mathematical environments, e.g. descriptive subscripts and superscripts, particle symbols using letters of the Latin alphabet.
+See Sec.~\ref{sec:greek} for symbols of particles using letters of the Greek alphabet.
+
+Examples:
+\begin{itemize}
+\item transverse momentum \ml{p_{\tn{T}}} (\verb!$p_{\tn{T}}$!)
+\item centre-of-mass energy of a nucleus--nucleus collision \ml{\sqrt{s_{\tn{NN}}}} (\verb!$\sqrt{s_{\tn{NN}}}$!)
+\item kaons \kaonp, \kaonm, \kaons, \kaonl{} (see Sec.~\ref{sec:particles})
+\end{itemize}
+
+\cprotect\subsubsection{\verb_\ml_ and \verb_\me_}
+
+Shortcuts for the inline math mode (math environment) \verb_\( \)_ and the (unnumbered) equation math mode (displaymath environment) \verb_\[ \]_
+
+\verb_\newcommand{\ml}[1]{\(#1\)}_
+
+\verb_\newcommand{\me}[1]{\[#1\]}_
+
+\subsubsection{Particle symbols}
+\label{sec:particles}
+
+Examples of particle symbols using the text mode correctly are listed in Tab.~\ref{tab:particles}.
+They make use of the following macros:
+
+\verb!\newcommand{\particle}[1]{\tn{#1}}!
+
+\verb!\newcommand{\partgr}[1]{{\particle{\gr{#1}}}}! (See Sec.~\ref{sec:greek}.)
+
+\verb!\newcommand{\anti}[1]{{\ensuremath{\overline{#1}}}}!
+
+\verb!\newcommand{\quark}[1]{\particle{#1}}!
+
+See also notes about spacing in Sec.~\ref{sec:spacing}.
+
+\begin{table}[htbp]
+\centering
+\caption[List of particle symbols.]{List of particle symbols.}
+\begin{tabular}{|c|l|}
+\hline
+\quark{u} & \verb!\quark{u}! \\
+\proton & \verb!\newcommand{\proton}{{\particle{p}}}! \\
+\aproton & \verb!\newcommand{\aproton}{{\anti{\proton}}}! \\
+\neutron & \verb!\newcommand{\neutron}{{\particle{n}}}! \\
+\electron & \verb!\newcommand{\electron}{{\particle{e}}}! \\
+\electronm & \verb!\newcommand{\electronm}{{\ensuremath{\electron^{-}}}}! \\
+\positron & \verb!\newcommand{\positron}{{\ensuremath{\electron^{+}}}}! \\
+\muon & \verb!\newcommand{\muon}{\partgr{m}}! \\
+\muonm & \verb!\newcommand{\muonm}{{\ensuremath{\muon^{-}}}}! \\
+\muonp & \verb!\newcommand{\muonp}{{\ensuremath{\muon^{+}}}}! \\
+\tauon & \verb!\newcommand{\tauon}{\partgr{t}}! \\
+\tauonm & \verb!\newcommand{\tauonm}{{\ensuremath{\tauon^{-}}}}! \\
+\tauonp & \verb!\newcommand{\tauonp}{{\ensuremath{\tauon^{+}}}}! \\
+\neutrino & \verb!\newcommand{\neutrino}{\partgr{n}}! \\
+\aneutrino & \verb!\newcommand{\aneutrino}{{\anti{\neutrino}}}! \\
+\photon & \verb!\newcommand{\photon}{\partgr{g}}! \\
+\pion & \verb!\newcommand{\pion}{\partgr{p}}! \\
+\pionp & \verb!\newcommand{\pionp}{{\ensuremath{\pion^{+}}}}! \\
+\pionm & \verb!\newcommand{\pionm}{{\ensuremath{\pion^{-}}}}! \\
+\pionz & \verb!\newcommand{\pionz}{{\ensuremath{\pion^{0}}}}! \\
+\kaon & \verb!\newcommand{\kaon}{\tn{K}}! \\
+\kaonp & \verb!\newcommand{\kaonp}{\ensuremath{\kaon^{+}}}! \\
+\kaonm & \verb!\newcommand{\kaonm}{\ensuremath{\kaon^{-}}}! \\
+\kaons & \verb!\newcommand{\kaons}{\ensuremath{{\kaon^{0}_{\tn{S}}}}}! \\
+\kaonl & \verb!\newcommand{\kaonl}{\ensuremath{{\kaon^{0}_{\tn{L}}}}}! \\
+\lmb & \verb!\newcommand{\lmb}{\partgr{L}}! \\
+\lmbc & \verb!\newcommand{\lmbc}{{\ensuremath{\lmb_{\quark{c}}^{+}}}}! \\
+\lmbb & \verb!\newcommand{\lmbb}{{\ensuremath{\lmb_{\quark{b}}^{0}}}}! \\
+\vzero & \verb!\newcommand{\vzero}{{\ensuremath{\particle{V}^{0}}}}! \\
+\dzero & \verb!\newcommand{\dzero}{{\ensuremath{\particle{D}^{0}}}}! \\
+\jpsi & \verb!\newcommand{\jpsi}{\mbox{\particle{J}/\partgr{y}}}! \\
+\hline
+\end{tabular}
+\label{tab:particles}
+\end{table}
+
+\subsubsection{High-energy physics quantities}
+
+\subsection{ROOT}
+
+\verb_TLatex_ class
+
+Italics in ROOT \verb!#it{}!.
+
+Minus signs on axes since v5-34-22.
+
+\verb!#minus!, \verb!#plus! since v5-34-11.
+
+En dash is not available in ROOT. Use \verb_\minus_ instead.
+
+Relation symbols \verb_>_ (greater than) and \verb_<_ (lesser than) look different when storing a~\verb_TCanvas_ directly in the \texttt{pdf} format.
+
+Note that Greek letters are printed using an upright font by default in ROOT.
+
+\section{Common mistakes}
+
+\(k_\tn{t}\), anti-\(k_\tn{t}\) algorithm, not \(k_\tn{T}\) (see the original articles)
+
+space around / in equations.
+
+Wrong units: \( p = \SI{5}{\gev} \) GeV \si{\gevc}
+
+Crazy axis labels: \( \dd N/\dd p_\tn{T}\ (\tn{GeV}/c)^{-1} \) GeV/$c$
+Exponents should not be outside the parentheses if the parentheses are supposed to be placed around the units. One can simply write: \( \dd N/\dd p_\tn{T}\ (c/\tn{GeV}) \).
+
+\subsection{ALICE guidelines}
+
+Official guidelines: pp, p--Pb, Pb--Pb for proton--proton, proton--lead and lead--lead collisions, respectively. Seriously?!
+Stay consistent! pp \( \rightarrow \) p--p.
+
+\ml{\phi} is not a meson!
+There is no upright counterpart for this glyph in \LaTeX{} text fonts because such glyph does not exist in the Greek alphabet.
+Since particle symbols are text entities they should be printed using text font.
+
+\appendix
+
+\section{Changelog}
+
+
+%\nocite{*}
+\bibliographystyle{/home/vit/Dokumenty/LaTeX-sandbox/templates/mystyle-urlbst}
+\bibliography{typography}
+
+\end{document}
