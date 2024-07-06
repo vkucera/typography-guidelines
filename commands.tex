@@ -1,130 +1,164 @@
 % User-defined commands
-%\newcommand{cmd name}[# of arguments]{latex expression} % template for a new command
 
-% Fonts and languages
-%\selectlanguage{language}
-%\begin{otherlanguage}{language} long text \end{otherlanguage}
-%\foreignlanguage{language}{short text}
-\newcommand{\czech}[1]{{\foreignlanguage{czech}{#1}}}
-\newcommand{\gr}[1]{{\foreignlanguage{greek}{#1}}} % default style of the greek font
+% syntax:
+%   \newcommand{cmd name}[# of arguments]{latex expression}
+
+% Languages
+%   syntax:
+%     \selectlanguage{language}
+%     \begin{otherlanguage}{language} long text \end{otherlanguage}
+%     \foreignlanguage{language}{short text}
+\newcommand{\czech}[1]{{\foreignlanguage{czech}{#1}}} % Czech text
+\newcommand{\gr}[1]{{\foreignlanguage{greek}{#1}}} % Greek text
+
+% Fonts
+\newcommand{\tn}[1]{\textnormal{#1}} % normal (upright non-bold) text font
 \newcommand{\rs}{\fontshape{rs}\selectfont} % serif font
-\newcommand{\grs}[1]{\gr{\rs{#1}}} % default style of the greek serif font
-\newcommand{\tn}[1]{\textnormal{#1}} % normal (upright non-bold) text
+\newcommand{\grs}[1]{\gr{\rs{#1}}} % Greek serif text
+\DeclareMathAlphabet{\mathup}{T1}{\familydefault}{m}{n} % upright math font
 
 % Document elements
+% definition of a chapter/section not having a number but listed in the table of content
+\newcommand{\addchapter}[1]{\clearpage\phantomsection\addcontentsline{toc}{chapter}{#1}} % single-sided printing
+\newcommand{\addsection}[1]{\clearpage\phantomsection\addcontentsline{toc}{section}{#1}} % single-sided printing
+%\renewcommand{\addchapter}[1]{\cleardoublepage\phantomsection\addcontentsline{toc}{chapter}{#1}} % two-sided printing
+%\renewcommand{\addsection}[1]{\cleardoublepage\phantomsection\addcontentsline{toc}{section}{#1}} % two-sided printing
+
+% Text formatting utilities
 \newcommand{\qm}[1]{``#1''} % text in English quotation marks
-%\renewcommand{\qm}[1]{\enquote{#1}} % localized quotation marks depending on the active language, requires csquotes package
-% Definition of a chapter not having a number but listed in the table of content
-\newcommand{\addchapter}[1]{\cleardoublepage\phantomsection\addcontentsline{toc}{chapter}{#1}} % two-sided printing
-\newcommand{\addsection}[1]{\cleardoublepage\phantomsection\addcontentsline{toc}{section}{#1}} % two-sided printing 
-%\newcommand{\addchapter}[1]{\clearpage\phantomsection\addcontentsline{toc}{chapter}{#1}} % single-sided printing
-%\newcommand{\addsection}[1]{\clearpage\phantomsection\addcontentsline{toc}{section}{#1}} % single-sided printing
-\newcommand{\hl}[1]{{\color{red}#1}} % text higlighted using the red colour, requires xcolor package
+%\let\qm\enquote % localised quotation marks for the current active language (csquotes package)
+\newcommand{\hl}[1]{{\color{red}#1}} % red text (xcolor package)
 \newcommand{\todo}[1]{\textbf{TODO:} \hl{#1}} % to do reminder
-%\def\celltop#1{\vtop{\null\hbox{#1}}} % ?
-\newcommand{\urlss}[1]{\hbox{\scriptsize \url{#1}}} % URLs with small font size
-\newcommand{\now}{\today, \currenttime} % requires package datetime
+\newcommand{\colorboxmath}[2]{\colorbox{#1}{\ensuremath{#2}}} % coloured math
+\newcommand{\urlss}[1]{{\scriptsize \url{#1}}} % URL with small font size
+\newcommand{\now}{\today, \currenttime} % current date and time (datetime package)
 
 % Mathematics
-\DeclareMathAlphabet{\mathup}{OT1}{\familydefault}{m}{n} % upright medium-weight math font
 \newcommand{\ml}[1]{\(#1\)} % LaTeX inline math mode (math environment)
 \newcommand{\me}[1]{\[#1\]} % LaTeX equation math mode (displaymath environment)
-%\newcommand{\mz}{~} % non-breakable space
 \newcommand{\dd}{\mathup{d}} % total differentiation symbol
 \newcommand{\df}{\stackrel{\mathup{def}}{=}} % definition symbol
-%\renewcommand{\vec}[1]{\mathbf{#1}} % style of vectors
-\renewcommand{\vec}[1]{\vectorsym{#1}} % style of vectors
 %\newcommand{\slfrac}[2]{\left.#1\right/#2} % solidus after a complex expression
-%\newcommand{\num}[2]{#1\:{\tn{#2}}} % unified style for typesetting physical quantities
-%\newcommand{\numo}[3]{\num{#1\cdot 10^{#2}}{#3}} % style physical quantities using the power of 10
-\newcommand{\pic}{\tn{\gr{p}}} % constant pi
-\newcommand{\euler}{\mathup{e}} % constant e
-\newcommand{\im}{\mathup{i}} % constant i
-%\newcommand{\micro}{\tn{\gr{m}}} % micro prefix
-\newcommand{\dt}{\tn{\gr{d}}} % upright lower case delta (symbol for variation or little difference)
-\newcommand{\Dt}{\tn{\gr{D}}} % upright upper case delta (symbol for great difference)
+%\renewcommand{\vec}[1]{\mathbf{#1}} % bold vectors
+%\renewcommand{\vec}[1]{\vectorsym{#1}} % bold italic vectors (isomath package)
+\renewcommand{\vec}[1]{\boldsymbol{#1}} % bold italic vectors
+\newcommand{\constpi}{\mathup{\pi}} % constant pi
+\renewcommand{\constpi}{\uppi} % constant pi (newtxmath)
+\newcommand{\conste}{\mathup{e}} % constant e
+\newcommand{\consti}{\mathup{i}} % constant i
+\newcommand{\dt}{\mathup{\delta}} % upright lower case delta (symbol for variation or little difference)
+\newcommand{\Dt}{\mathup{\Delta}} % upright upper case delta (symbol for great difference)
+\renewcommand{\dt}{\updelta} % upright lower case delta (symbol for variation or little difference) (newtxmath)
+\renewcommand{\Dt}{\upDelta} % upright upper case delta (symbol for great difference) (newtxmath)
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle} % average
 
-% Symbols in high-energy physics
-\newcommand{\pt}{{p_\tn{T}}} % transverse momentum (pt)
-\newcommand{\et}{{E_\tn{T}}} % transverse energy
-\newcommand{\pti}[1]{{p_{\tn{T},{#1}}}} % pt with a lower index
-\newcommand{\ptj}{{p_\tn{T}^\tn{jet}}} % pt of a jet
-\newcommand{\ptjch}{{p_\tn{T}^\tn{jet,ch}}} % pt of a charged jet
-\newcommand{\pth}{{p_\tn{T}^\particle{h}}} % pt of a hadron
-\newcommand{\ptt}{{p_\tn{T}^\tn{track}}} % pt of a track
-\newcommand{\ptm}{{p_\tn{T}^\tn{min}}} % minimum pt
-\newcommand{\ptvo}{{p_\tn{T}^{\vo}}} % pt of a V0 particle
-\newcommand{\etavo}{{\eta_{\vo}}} % eta of a V0 particle
-\newcommand{\aj}{{A_\tn{jet}}} % area of a jet
-\newcommand{\ajch}{{A_\tn{jet,ch}}} % area of a charged jet
-% Units (siunitx)
+% Units
+% siunitx package
 \sisetup{%
-range-phrase=\text{--}, % use en dash for ranges
-range-units=single % type unit only once in the ranges
-%output-decimal-marker={,}
-%detect-all % typeset numbers with text font instead of mathrm
+    range-phrase=\text{--}, % use en dash for ranges
+    range-units=single, % type unit only once in the ranges
+    separate-uncertainty % print uncertainty in format (num ± unc)
+    %output-decimal-marker={,}
+    %detect-all % typeset numbers with text font instead of mathrm
 }%
-\DeclareSIUnit\clight{\text{\ensuremath{c}}}
-\newcommand{\mev}{\si{\mega\electronvolt}} % MeV
-\newcommand{\gev}{\si{\giga\electronvolt}} % GeV
-\newcommand{\mevc}{\si[per-mode=symbol]{\mega\electronvolt\per\clight}} % MeV/c
-\newcommand{\gevc}{\si[per-mode=symbol]{\giga\electronvolt\per\clight}} % GeV/c
-\newcommand{\mevcc}{\si[per-mode=symbol]{\mega\electronvolt\per\clight\squared}} % MeV/c^2
-\newcommand{\gevcc}{\si[per-mode=symbol]{\giga\electronvolt\per\clight\squared}} % GeV/c^2
-\newcommand{\tev}{\si{\tera\electronvolt}} % TeV
-\newcommand{\fermi}{\si{\femto\metre}} % fm
-\newcommand{\fmperc}{\si[per-mode=symbol]{\fermi\per\clight}} % fm/c
-% Other terms
-\newcommand{\kt}{\ensuremath{k_\tn{t}}} % k_t algorithm, warning: {} needed after the cmd if another text follows after
-\newcommand{\akt}{anti-\kt} % anti-k_t algorithm
-\newcommand{\snn}{\ensuremath{\sqrt{s_\particle{NN}}}} % cms energy per nucleon pair
-\newcommand{\coll}[2]{\mbox{#1--#2}} % collision notation
-%\newcommand{\coll}[2]{\mbox{$#1+#2$}} % collision notation
-%\newcommand{\pbpb}{\coll{\pb}{\pb}} % symbol for lead--lead (ALICE convention: Pb--Pb)
-\newcommand{\pbpb}{\mbox{\pb--\pb}} % symbol for lead--lead (ALICE convention: Pb--Pb)
-\newcommand{\ppb}{\mbox{\proton--\pb}} % symbol for proton--lead (ALICE convention: p--Pb)
-\newcommand{\pp}{\mbox{\proton\proton}} % symbol for proton--proton (ALICE convention: pp)
-\newcommand{\cent}{\tn{c.}} % abbreviation for centrality
-\newcommand{\interact}{\ensuremath{\rightarrow}} % symbol for interaction equations
+\DeclareSIUnit\clight{\text{\ensuremath{c}}} % speed of light in vacuum
+% \DeclareSIUnit[number-unit-product = ]\percent{\char`\%} % to remove the space before the percentage symbol
+% energy
+\newcommand{\mev}{\unit{\mega\electronvolt}} % MeV
+\newcommand{\gev}{\unit{\giga\electronvolt}} % GeV
+\newcommand{\tev}{\unit{\tera\electronvolt}} % TeV
+% momentum
+\newcommand{\gevc}{\unit[per-mode=symbol]{\giga\electronvolt\per\clight}} % GeV/c
+\newcommand{\mevc}{\unit[per-mode=symbol]{\mega\electronvolt\per\clight}} % MeV/c
+% mass
+\newcommand{\mevcc}{\unit[per-mode=symbol]{\mega\electronvolt\per\clight\squared}} % MeV/c^2
+\newcommand{\gevcc}{\unit[per-mode=symbol]{\giga\electronvolt\per\clight\squared}} % GeV/c^2
+% other
+\newcommand{\fm}{\unit{\femto\metre}} % fm
+\newcommand{\fmc}{\unit[per-mode=symbol]{\femto\metre\per\clight}} % fm/c
 
 % Particle symbols
-\newcommand{\particle}[1]{\tn{#1}} % all particles must be typeset using an upright non-bold font
-\newcommand{\partgr}[1]{{\particle{\gr{#1}}}} % particle denoted by a greek letter, not available at 6 pt in math mode
-\newcommand{\anti}[1]{{\ensuremath{\overline{#1}}}} % anti-particle
+% All particles must be typeset using an upright text font, if possible.
+% formatting commands
+\newcommand{\particle}[1]{\textup{#1}} % upright text font
+\newcommand{\anti}[1]{\ensuremath{\overline{#1}}} % anti-particle
 \newcommand{\quark}[1]{\particle{#1}}
-\newcommand{\gluon}{\particle{g}}
-\newcommand{\vzero}{{\ensuremath{\particle{V}^{\tn{0}}}}}
-\newcommand{\dzero}{{\ensuremath{\particle{D}^{\tn{0}}}}}
-\newcommand{\proton}{{\particle{p}}}
-\newcommand{\aproton}{{\anti{\proton}}} % antiproton
-\newcommand{\neutron}{{\particle{n}}}
-\newcommand{\electron}{{\particle{e}}}
-\newcommand{\electronm}{{\ensuremath{\electron^{-}}}}
-\newcommand{\electronp}{{\ensuremath{\electron^{+}}}}
-\newcommand{\positron}{{\electronp}}
-\newcommand{\muon}{\partgr{m}}
-\newcommand{\muonm}{{\ensuremath{\muon^{-}}}}
-\newcommand{\muonp}{{\ensuremath{\muon^{+}}}}
-\newcommand{\tauon}{\partgr{t}}
-\newcommand{\tauonm}{{\ensuremath{\tauon^{-}}}}
-\newcommand{\tauonp}{{\ensuremath{\tauon^{+}}}}
-\newcommand{\neutrino}{\partgr{n}}
-\newcommand{\aneutrino}{{\anti{\neutrino}}}
-\newcommand{\photon}{\partgr{g}}
-\newcommand{\pion}{\partgr{p}}
-\newcommand{\pionp}{{\ensuremath{\pion^{+}}}}
-\newcommand{\pionm}{{\ensuremath{\pion^{-}}}}
-\newcommand{\pionz}{{\ensuremath{\pion^{0}}}}
+\newcommand{\particlegr}[1]{\particle{\gr{#1}}} % particle denoted by a Greek letter
+% simple symbols
+\newcommand{\proton}{\particle{p}}
+\newcommand{\neutron}{\particle{n}}
+\newcommand{\electron}{\particle{e}}
+\newcommand{\muon}{\particlegr{m}}
+\newcommand{\tauon}{\particlegr{t}}
+\newcommand{\neutrino}{\particlegr{n}}
+\newcommand{\pion}{\particlegr{p}}
 \newcommand{\kaon}{\particle{K}}
-\newcommand{\kaonp}{{\ensuremath{\kaon^{+}}}}
-\newcommand{\kaonm}{{\ensuremath{\kaon^{-}}}}
-\newcommand{\kaons}{{\ensuremath{{\kaon^{0}_{\tn{S}}}}}}
-\newcommand{\kaonl}{{\ensuremath{{\kaon^{0}_{\tn{L}}}}}}
-\newcommand{\lmb}{\partgr{L}}
-\newcommand{\lmbc}{{\ensuremath{\lmb_{\quark{c}}^{+}}}}
-\newcommand{\lmbb}{{\ensuremath{\lmb_{\quark{b}}^{0}}}}
-\newcommand{\jpsi}{\mbox{\particle{J}/\partgr{y}}}
+\newcommand{\lmb}{\particlegr{L}}
+\newcommand{\mesonpsi}{\particlegr{y}}
+\newcommand{\mesonphi}{\particlegr{f}}
+\newcommand{\photon}{\particlegr{g}}
+\newcommand{\gluon}{\particle{g}}
+\newcommand{\bosonw}{\particle{W}}
+\newcommand{\bosonz}{\particle{Z}}
+\newcommand{\higgs}{\particle{H}}
+% alternative simple symbols using upgreek or newtxmath (lowercase) package
+% Comment these out if the text font includes Greek letters.
+\renewcommand{\muon}{\ensuremath{\upmu}}
+\renewcommand{\tauon}{\ensuremath{\uptau}}
+\renewcommand{\neutrino}{\ensuremath{\upnu}}
+\renewcommand{\pion}{\ensuremath{\uppi}}
+\renewcommand{\photon}{\ensuremath{\upgamma}}
+\renewcommand{\lmb}{\ensuremath{\Uplambda}}
+\renewcommand{\mesonpsi}{\ensuremath{\uppsi}}
+\renewcommand{\mesonphi}{\ensuremath{\upvarphi}}
+% alternative simple symbols using newtxmath package
+% (Lowercase symbols have same names as in upgreek.)
+%   Comment these out if the text font includes Greek letters.
+\renewcommand{\lmb}{\ensuremath{\upLambda}}
+% derived symbols
+\newcommand{\aproton}{\anti{\proton}}
+\newcommand{\electronminus}{\ensuremath{\electron^{-}}}
+\newcommand{\positron}{\ensuremath{\electron^{+}}}
+\newcommand{\muonminus}{\ensuremath{\muon^{-}}}
+\newcommand{\muonplus}{\ensuremath{\muon^{+}}}
+\newcommand{\tauonminus}{\ensuremath{\tauon^{-}}}
+\newcommand{\tauonplus}{\ensuremath{\tauon^{+}}}
+\newcommand{\bosonwminus}{\ensuremath{\bosonw^{-}}}
+\newcommand{\bosonwplus}{\ensuremath{\bosonw^{+}}}
+\newcommand{\pionminus}{\ensuremath{\pion^{-}}}
+\newcommand{\pionplus}{\ensuremath{\pion^{+}}}
+\newcommand{\pionzero}{\ensuremath{\pion^{0}}}
+\newcommand{\kaonminus}{\ensuremath{\kaon^{-}}}
+\newcommand{\kaonplus}{\ensuremath{\kaon^{+}}}
+\newcommand{\kzeros}{\ensuremath{\kaon^{0}_{\textup{S}}}}
+\newcommand{\kzerol}{\ensuremath{\kaon^{0}_{\textup{L}}}}
+\newcommand{\dzero}{\ensuremath{\particle{D}^{0}}}
+\newcommand{\dplus}{\ensuremath{\particle{D}^{+}}}
+\newcommand{\dsubs}{\ensuremath{\particle{D}_{\quark{s}}^{+}}}
+\newcommand{\lmbc}{\ensuremath{\lmb_{\quark{c}}^{+}}}
+\newcommand{\lmbb}{\ensuremath{\lmb_{\quark{b}}^{0}}}
+\newcommand{\bplus}{\ensuremath{\particle{B}^{+}}}
+\newcommand{\jpsi}{\mbox{\particle{J}/\mesonpsi}}
+\newcommand{\vzero}{\ensuremath{\particle{V}^{0}}}
+% nuclei
+\newcommand{\pb}{\particle{Pb}} % lead
 
-\newcommand{\pb}{\particle{Pb}} % lead (element or nucleus)
+% Collision systems
+\newcommand{\coll}[2]{\mbox{#1--#2}} % en dash notation
+\newcommand{\pbpb}{\coll{\pb}{\pb}} % lead--lead (ALICE convention: Pb--Pb)
+\newcommand{\ppb}{\coll{\proton}{\pb}} % proton--lead (ALICE convention: p--Pb)
+\newcommand{\pbp}{\coll{\pb}{\proton}} % lead--proton (ALICE convention: Pb--p)
+\newcommand{\pp}{\coll{\proton}{\proton}} % proton--proton
+%\newcommand{\pp}{\mbox{\proton\proton}} % proton--proton (ALICE convention: pp)
 
-% Other
+% Quantities
+\newcommand{\gen}{\tn{gen.}} % generator level label
+\newcommand{\rec}{\tn{rec.}} % reconstruction level label
+% collisions
+\newcommand{\snn}{\sqrt{s_{\particle{NN}}}} % cms energy per nucleon pair
+\newcommand{\dnchdeta}{\dd N_{\tn{ch}}/\dd\eta} % dN_ch/deta
+\newcommand{\dnchdy}{\dd N_{\tn{ch}}/\dd y} % dN_ch/dy
+% kinematics
+\newcommand{\pvec}{\vec{p}} % momentum vector
+\newcommand{\pt}{p_{\tn{T}}} % p_T, transverse momentum
+\newcommand{\pts}[1]{p_{\tn{T,\,}{#1}}} % p_T with additional subscript
